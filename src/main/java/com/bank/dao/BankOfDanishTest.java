@@ -28,9 +28,16 @@ public class BankOfDanishTest {
 	
 	 HibernateTemplate hibernateTemplate = (HibernateTemplate) daoContext.getBean("hibernateTemplate");
 	 
-	 UserBean userBean = findUserbyId(hibernateTemplate,1);
+	 UserBean userBean = findUserbyId(hibernateTemplate,2);
 	 
-	 System.out.println(userBean.getUsername());
+	 deleteUserById(hibernateTemplate,2);
+	 
+	
+	 
+	 
+	 
+	 
+	  System.out.println(userBean.getUsername());
 	 }
 
 		catch (Exception ex) {
@@ -39,6 +46,18 @@ public class BankOfDanishTest {
 
 	}
 
+	private static void deleteUserById(HibernateTemplate hibernateTemplate, int id) {
+		
+		UserBean userBeanObject = (UserBean)hibernateTemplate.load(UserBean.class, id);
+       hibernateTemplate.delete(userBeanObject);	
+       
+       
+}
+
+	
+	
+	
+	
 	@SuppressWarnings("unchecked")
 	private static UserBean findUserbyId(HibernateTemplate hibernateTemplate,final int id) {
 		
